@@ -249,7 +249,7 @@ class HtmlDiff
                     }
                     $current_word = "<";
                     $mode = 'tag';
-                } elseif ( preg_match( "[^\s]", $character ) > 0 ) {
+                } elseif ( !$this->isWhiteSpace($character) ) { //preg_match( "[^\s]", $character ) > 0 ) {
                     if ($current_word != '') {
                         $words[] = $current_word;
                     }
@@ -273,7 +273,7 @@ class HtmlDiff
                     $words[] = $current_word;
                     $current_word = "";
 
-                    if ( !preg_match('[^\s]', $character ) ) {
+                    if ( $this->isWhiteSpace($character) ) { //!preg_match('[^\s]', $character ) ) {
                         $mode = 'whitespace';
                     } else {
                         $mode = 'character';
@@ -289,7 +289,7 @@ class HtmlDiff
                     }
                     $current_word = "<";
                     $mode = 'tag';
-                } elseif ( preg_match( "[^\s]", $character ) ) {
+                } elseif ( !$this->isWhiteSpace($character) ) { //preg_match( "[^\s]", $character ) ) {
                     $current_word .= $character;
                 } else {
                     if ($current_word != '') {
@@ -322,7 +322,7 @@ class HtmlDiff
 
     protected function isWhiteSpace($value)
     {
-        return !preg_match( '[^\s]', $value );
+        return !preg_match( '/[^\s]/', $value );
     }
 
     protected function explode($value)
