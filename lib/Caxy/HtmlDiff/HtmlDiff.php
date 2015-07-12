@@ -328,7 +328,7 @@ class HtmlDiff
     protected function explode($value)
     {
         // as suggested by @onassar
-        return preg_split( '//u', $value );
+        return preg_split( '//u', $value, -1, PREG_SPLIT_NO_EMPTY  );
     }
 
     protected function performOperation($operation)
